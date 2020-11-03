@@ -1,0 +1,58 @@
+Deploying a Django app on Amazon EC2 instance
+
+
+-> Launch an Amazon EC2 Instance(ubuntu)
+
+-> Enable port 8000 80 22
+
+-> Connect it through putty or Mobaxterm
+
+-> Install Python3
+
+->run sudo apt update
+
+->Install nginx  sudo apt-get install nginx
+
+-> test the installation https://publicaddress:80
+
+->install python pip sudo apt install python3-pip
+
+->download the django project from git using git clone
+
+->install the requirements.txt packages  pip install -r filepath
+
+->install gunicorn  pip3 install gunicorn
+
+->edit the settings.py file add the allowed host ipaddress
+
+-> run the gunicorn server  gunicorn --bind 0.0.0.0:8000 wsgi
+
+-> test the connection by using the publicaddress
+
+-> nginx has to connect gunicorn
+
+-> vi /etc/nginx/site-enabled/default
+
+->change the location /whatever the request comming to nginx we need to root it through gunicorn.
+
+-> add proxy_pass http://0.0.0.0:8000
+
+-> create Mongo database
+
+-> add the below statements to settings.py to connect the mongodb to Django application
+
+from mongoengine import *
+
+'django_mongoengine', // Add this line to installed app
+
+MONGODB_DATABASES = {
+"default": {
+"name": '<db_name>',
+"host": 'localhost',
+"password": '',
+"username": '',
+"tz_aware": True, # if you using timezones in django (USE_TZ = True)
+},
+}
+
+-> Open http://localhost:8000/api/mongo/ to test the application. 
