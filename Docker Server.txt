@@ -1,0 +1,15 @@
+Pre-requisites
+Amazon Linux EC2 Instance
+Installation Steps
+Install docker and start docker services
+yum install docker -y
+docker --version 
+
+# start docker services
+service docker start
+service docker status
+Create a user called dockeradmin
+useradd dockeradmin
+passwd dockeradmin
+add a user to docker group to manage docker
+usermod -aG docker dockeradmin 
